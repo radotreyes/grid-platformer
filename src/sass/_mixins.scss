@@ -1,0 +1,38 @@
+@import 'functions';
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: '';
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > #root {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@mixin flex($direction, $wrap, $justification-axis) {
+  display: flex;
+  flex-flow: $direction $wrap;
+
+  @if $justification-axis == 'inline' or 'both' {
+    justify-content: center;
+  }
+  @if $justification-axis == 'block' or 'both' {
+    align-items: center;
+  }
+  @content;
+}
+
+@mixin uniform-grid($cell-size, $rows, $cols) {
+  display: grid;
+  grid-template-rows: repeat($rows, $cell-size);
+  grid-template-columns: repeat($cols, $cell-size);
+  @content;
+}

@@ -1,0 +1,12 @@
+@mixin flex($direction, $wrap, $justification-axis) {
+  display: flex;
+  flex-flow: $direction $wrap;
+
+  @if justification-axis == 'inline' or 'both' {
+    justify-content: center;
+  }
+  @if justification-axis == 'block' or 'both' {
+    align-items: center;
+  }
+  @content;
+}
